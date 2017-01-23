@@ -7,10 +7,10 @@ var JwtStrategy = require('passport-jwt').Strategy;
 var ExtractJwt = require('passport-jwt').ExtractJwt;
  
 var EXPIRES_IN_MINUTES = 60 * 24;
-var SECRET = process.env.tokenSecret || "4ukI0uIVnB3iI1yxj646fVXSE3ZVk4doZgz6fTbNg7jO41EAtl20J5F7Trtwe7OM";
-var ALGORITHM = "HS256";
-var ISSUER = "nozus.com";
-var AUDIENCE = "nozus.com";
+var SECRET = "4ukI0uIVnB3iI1yxj646fVXSE3ZVk4doZgz6fTbNg7jO41EAtl20J5F7Trtwe7OM";
+var ALGORITHM = "HS512";
+var ISSUER = "planitpoker.com";
+var AUDIENCE = "planitpoker.com";
  
 /**
  * Configuration object for local strategy
@@ -25,12 +25,21 @@ var LOCAL_STRATEGY_CONFIG = {
  * Configuration object for JWT strategy
  */
 var JWT_STRATEGY_CONFIG = {
-  secretOrKey: "PL@n!TpOk3|3",
+  secretOrKey: SECRET,
   issuer : ISSUER,
   audience: AUDIENCE,
   passReqToCallback: false
 };
- 
+  
+module.exports.jwtSettings = {
+  expiresInMinutes: EXPIRES_IN_MINUTES ,
+  secret: SECRET,
+  algorithm : ALGORITHM,
+  issuer : ISSUER,
+  audience : AUDIENCE
+};
+
+
 /**
  * Triggers when user authenticates via local strategy
  */
@@ -66,7 +75,7 @@ var opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
 opts.secretOrKey = JWT_STRATEGY_CONFIG.secretOrKey;
 passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-    User.findOne({id: jwt_payload.id}, function(err, user) {
+    User.findOne({id: jwt_payload.user.id}, function(err, user) {
         if (err) {
             return done(err, false);
         }
@@ -78,11 +87,3 @@ passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
         }
     });
 }));
- 
-module.exports.jwtSettings = {
-  expiresInMinutes: EXPIRES_IN_MINUTES,
-  secret: SECRET,
-  algorithm : ALGORITHM,
-  issuer : ISSUER,
-  audience : AUDIENCE
-};
