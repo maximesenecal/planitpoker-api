@@ -64,5 +64,7 @@ module.exports.routes = {
    * OR with custom route
    * /api/project/:id/users
    */
-   'get /api/project/:id/users' : "ProjectController.findUsersByProject"
+   'get /api/project/:id/users' : "ProjectController.findUsersByProject",
+
+   'post /api/project/adduser' : 'ProjectController.addUserInProject'
 };

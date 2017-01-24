@@ -17,6 +17,25 @@ module.exports = {
 		});
 	},
 
+	addUserInProject: function(req, res){
+		Project.findOne(req.param('projectid'))
+		.exec(function afterwards(err, project){
+			if(err){
+				return res.serverError(err)
+			}
+			//TODO: Check with a service if the userid exists
+			project.owners.add(req.param('userid'));
+			project.save(function(err){
+				if (err) {
+					return res.serverError(err);
+				}
+				else {
+					return res.json(project);
+				}
+			});
+		});
+},
+
 	createMockData: function(req, res) {
 		var project = {
 			name: req.param('name'),
