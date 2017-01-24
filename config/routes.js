@@ -41,22 +41,27 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
   /*
-   * POST userid: name:
+   * POST
+   *  userid: the user id
+   *  name: name of the project
    * Create mock data project
    */
   'post /api/project/create/mock' : "ProjectController.createMockData",
 
   /*
-   * Récupérer la liste des projets d'un utilisateur
-   * /user/:id/projects from BluePrint
-   * OR use custom route
+   * GET Récupérer la liste des projets d'un utilisateur
+   * From BluePrint
+   * /user/:id/projects
+   * OR with custom route
    * /api/user/:id/projects
    */
   'get /api/user/:id/projects': 'UserController.findProjectsByUser',
+
   /*
-   * Récupérer la liste des utilisateurs d'un projet
-   * /project/:id/owners from BluePrint
-   * OR use custom route
+   * GET Récupérer la liste des utilisateurs d'un projet
+   * From BluePrint
+   * /project/:id/owners
+   * OR with custom route
    * /api/project/:id/users
    */
    'get /api/project/:id/users' : "ProjectController.findUsersByProject"

@@ -19,19 +19,16 @@ module.exports = {
     });
   },
 
-  /*
-  * Retourne la liste des projets d'un utilisateur spécifique
-  */
   findProjectsByUser: function (req, res) {
     User.findOneById(
       req.param('id')
     )
     .populate('projects')
-    .exec(function afterwards(err, projects){
+    .exec(function afterwards(err, user){
       if (err) {
         return res.serverError(err);
       }
-      return res.json(projects);
+      return res.json(user.projects);
     });
   }
 };
