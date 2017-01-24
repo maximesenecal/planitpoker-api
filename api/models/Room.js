@@ -11,7 +11,7 @@ module.exports = {
   	project: {
   		model: 'project',
   		unique:false
-  	}
+  	},
   	name:{
   		required:true,
   		unique:false

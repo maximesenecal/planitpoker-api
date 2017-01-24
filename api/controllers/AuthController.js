@@ -3,6 +3,7 @@
  * @description :: Server-side logic for manage user's authorization
  */
 var passport = require('passport');
+var jwt = require('jsonwebtoken');
 /**
  * Triggers when user authenticates via passport
  * @param {Object} req Request object
@@ -19,7 +20,6 @@ function _onPassportAuth(req, res, error, user, info) {
         return res.unauthorized(null, info && info.code, info && info.message);
 
     return res.ok({
-        // TODO: replace with new type of cipher service
         token: CipherService.createToken(user),
         user: user
     });
@@ -42,7 +42,7 @@ module.exports = {
                     };
                 })
                 .then(res.created)
-                .acatch(res.conflict);
+                .catch(res.conflict);
     },
 
     /**
@@ -53,5 +53,5 @@ module.exports = {
     signin: function (req, res) {
         passport.authenticate('local',
                 _onPassportAuth.bind(this, req, res))(req, res);
-    },
+    }
 };
