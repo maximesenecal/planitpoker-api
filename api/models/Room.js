@@ -10,12 +10,11 @@ module.exports = {
   attributes: {
   	project: {
   		model: 'project',
-  		unique:false
-  	}
+  		unique: false
+  	},
   	name:{
-  		required:true,
-  		unique:false
+  		required: true,
+  		unique: false
   	}
   }
-};
-
+}

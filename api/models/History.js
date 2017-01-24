@@ -6,9 +6,4 @@
  */
 
 module.exports = {
-
-  attributes: {
-
-  }
 };
-

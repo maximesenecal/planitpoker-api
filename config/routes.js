@@ -31,7 +31,6 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
-
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
@@ -41,5 +40,24 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
+  /*
+   * POST userid: name:
+   * Create mock data project
+   */
+  'post /api/project/create/mock' : "ProjectController.createMockData",
 
+  /*
+   * Récupérer la liste des projets d'un utilisateur
+   * /user/:id/projects from BluePrint
+   * OR use custom route
+   * /api/user/:id/projects
+   */
+  'get /api/user/:id/projects': 'UserController.findProjectsByUser',
+  /*
+   * Récupérer la liste des utilisateurs d'un projet
+   * /project/:id/owners from BluePrint
+   * OR use custom route
+   * /api/project/:id/users
+   */
+   'get /api/project/:id/users' : "ProjectController.findUsersByProject"
 };

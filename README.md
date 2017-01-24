@@ -1,3 +1,8 @@
-# PlanItPoker-api
+#PlanItPoker-api
 
-a [Sails](http://sailsjs.org) application
+API for PlanItPoker's application built with [Sails](http://sailsjs.org)
+
+#Pré-requis
+NodeJS
+MongoDB
+Sails
