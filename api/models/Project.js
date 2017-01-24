@@ -1,26 +1,26 @@
 /**
  * Project.js
  *
- * @description :: TODO: You might write a short summary of how this model works and what it represents here.
+ * @description :: Les projets dans lesquels les utilisateurs sont membres et les rooms associées à ce projet
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
 module.exports = {
 
   attributes: {
-	user: {
-  		model: 'user',
-        required: true,
-        unique: false
-  	},
-  	name:{
+  	name: {
   		type: "string",
   		required: true
   	},
   	room:{
-  		collection:'room',
-  		via:'project'
-  	}
-  }
-};
+  		collection: 'room',
+  		via: 'project'
+  	},
 
+    // Reference to User
+    owners: {
+     collection: 'user',
+     via: 'projects'
+    }
+  }
+}
