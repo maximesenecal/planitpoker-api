@@ -11,6 +11,24 @@ module.exports = {
       required: true,
       type: 'STRING'
     },
+    name: {
+        type: 'string',
+    },
+    email: {
+        type: 'string',
+        required: true,
+        unique: true
+    },
+    password: {
+        type: 'string',
+        required: true
+    },
+    // override default toJSON
+    toJSON: function () {
+        var obj = this.toObject();
+        delete obj.password;
+        return obj;
+    },
 
     // One-to-Many relation to Project
     projects: {
@@ -18,5 +36,14 @@ module.exports = {
       via: "owners",
       dominant: true
     }
+  },
+
+  beforeUpdate: function (values, next) {
+      CipherService.hashPassword(values);
+      next();
+  },
+  beforeCreate: function (values, next) {
+      CipherService.hashPassword(values);
+      next();
   }
 };
