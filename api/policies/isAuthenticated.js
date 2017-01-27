@@ -11,7 +11,7 @@ module.exports = function (req, res, next) {
         if (!user)
             return res.unauthorized(null, info && info.code, info && info.message);
         req.user = user;
-
+        sails.log.debug("User : "+user.id);
         next();
     })(req, res);
 };

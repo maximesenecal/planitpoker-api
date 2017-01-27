@@ -18,19 +18,19 @@ module.exports = {
 	},
 
 	addUserInProject: function(req, res){
-		Project.findOne(req.param('projectid'))
+		Project.findOne(req.param('id'))
 		.exec(function afterwards(err, project){
 			if(err){
 				return res.serverError(err)
 			}
 			//TODO: Check with a service if the userid exists
-			project.owners.add(req.param('userid'));
+			project.owners.add(req.param('new_user'));
 			project.save(function(err){
 				if (err) {
 					return res.serverError(err);
 				}
 				else {
-					return res.json(project);
+					return res.send("A new user was added by the admin");
 				}
 			});
 		});

@@ -28,9 +28,15 @@ module.exports.policies = {
 
     // '*': true,
     '*': ['isAuthenticated'],
+
     AuthController: {
         '*': true
     },
+
+    ProjectController:{
+        '*': 'isAuthenticated',
+        addUserInProject: ['isAuthenticated', 'isAdminProject']
+    }
 
     /***************************************************************************
      *                                                                          *
